@@ -9,9 +9,8 @@ Make sure you have a recent version of Node.js (v8+) installed (we recommend usi
 Install [VS Code](https://code.visualstudio.com/) or a TypeScript Intellisense plugin for your favorite text editor.
 
 ```bash
-$ git clone github.com/VICEMedia/intro-to-typescript
-$ cd intro-to-typescript/exercise
-$ npm install
+$ git clone github.com/VICEMedia/gdi-typescript-day1
+$ cd gdi-typescript-day1/exercise
 ```
 
 ---
@@ -46,15 +45,15 @@ TypeScript is a transpiled programming language that adds a type system to JavaS
 
 ---
 
-## Intellisense
-
-// TODO Example gif of Intellisense in action
-
----
-
 ## Collaboration
 
 When working on larger projects, not all members of a team may have complete knowledge of the codebase. TypeScript helps contributors glean the input and output of a function and infer what a data structure should look like in order for a part of the application to function properly.
+
+---
+
+## Intellisense
+
+// TODO Example gif of Intellisense in action
 
 ---
 
@@ -80,16 +79,24 @@ When working on larger projects, not all members of a team may have complete kno
 
 # Getting Started
 
-Create a new directory outside of the presentation directory.
+Let's go through the basic project setup.
 
 ```bash
 $ npm init
 $ npm install typescript
 $ npm install ts-node
 ```
+
+```notes
+For this section we'll be going through basic setup and writing first types together.
+This is a code-along, so we'll pause at each slide to switch to the text editor.
+```
+
 ---
 
 Add a command to run your scripts
+
+// TODO verify that this "run" works as expected. It may not since "npm run" is reserved
 
 ```json
 {
@@ -98,7 +105,7 @@ Add a command to run your scripts
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ts": "ts-node"
+    "run": "ts-node"
   },
   "author": "",
   "license": "ISC",
@@ -109,13 +116,53 @@ Add a command to run your scripts
 }
 ```
 
+```notes
+The only thing that's noteworthy here is the "scripts" object
+```
+
 ---
 
 # The Type System
 
+The means by which TypeScript checks to see if your code is type safe
+
 ---
 
-// TODO Example of common types
+<CodeSurfer
+  title='What does TypeScript syntax look like?'
+  code={require('!raw-loader!./snippets/syntax-example.ts')}
+  lang='typescript'
+  steps={[
+    { notes: 'Let\'s look at a few examples' },
+    { tokens: { 1: [2, 3, 4] }, notes: 'Most type declarations follow this syntax' },
+    { tokens: { 2: [6, 7, 8] }, notes: 'We can use the same syntax for a funtion\s parameters...' },
+    { tokens: { 2: [10, 11, 12] }, notes: '... as well as a function\'s return type' },
+  ]}
+/>
+
+```notes
+No code-along here, but take a minute to discuss how a variables type cannot change
+```
+
+---
+
+## Common TypeScript types
+
+```typescript
+// Boolean
+const myBool: boolean = true;
+
+// Number
+const myNum: number = 6;
+const myFloat: number = 6.6;
+const myHex: number = 0xf00d;
+
+// String
+const myString: string = 'Hello World';
+
+// Array
+const myArr: number[] = [6, 23, 4.8];
+```
 
 ---
 
