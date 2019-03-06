@@ -16,6 +16,7 @@ $ cd gdi-typescript-day1/exercise
 ---
 
 # Your Instructors
+// TODO add Instructors
 
 ---
 
@@ -39,15 +40,74 @@ $ cd gdi-typescript-day1/exercise
 
 TypeScript is a transpiled programming language that adds a type system to JavaScript.
 
+```notes
+This portion is direct teach. Students should be listening and possibly taking notes, but not coding along
+```
+
 ---
 
-// TODO Example of TypeScript code transpiled to JavaScript
+```typescript
+// TypeScript input
+interface Greeting {
+  name: string;
+  greet: () => void;
+}
+
+class SayHello implements Greeting {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  greet = () => {
+    console.log(`Hello, ${this.name}`);
+  }
+}
+const greetEveryone = new SayHello('World');
+greetEveryone.greet();
+```
+
+---
+
+```js
+// JavaScript output
+class SayHello {
+  constructor(name) {
+      this.greet = () => {
+          console.log(`Hello, ${this.name}`);
+      };
+      this.name = name;
+  }
+}
+const greetEveryone = new SayHello('World');
+greetEveryone.greet();
+```
+
+---
+
+## Compile-Time Checks
+
+Compile-time checks allow us to enforce that our program will execute properly without having to run it.
+
+```typescript
+add(5, '2');
+// Argument of type '"2"' is not assignable to parameter of type 'number'.
+```
 
 ---
 
 ## Collaboration
 
-When working on larger projects, not all members of a team may have complete knowledge of the codebase. TypeScript helps contributors glean the input and output of a function and infer what a data structure should look like in order for a part of the application to function properly.
+When working on larger projects, not all members of a team may have complete knowledge of the codebase.
+
+TypeScript helps contributors glean the input and output of a function and infer what a data structure should look like in order for a part of the application to work properly.
+
+```typescript
+function generateArticle(title: string, body: string, author: User): Article {
+  ...
+}
+```
 
 ---
 
@@ -72,8 +132,11 @@ When working on larger projects, not all members of a team may have complete kno
 * type inference
 * writing & implementing interfaces
 * any types & type assertions
-* using npm to fetch type definitions for a package
-* creating an Express app from the ground up using TypeScript
+* putting together classes, interfaces, and types
+
+```notes
+Now is the time for students to begin typing along
+```
 
 ---
 
@@ -90,13 +153,12 @@ $ npm install ts-node
 ```notes
 For this section we'll be going through basic setup and writing first types together.
 This is a code-along, so we'll pause at each slide to switch to the text editor.
+Make sure to explain why we're using ts-node
 ```
 
 ---
 
 Add a command to run your scripts
-
-// TODO verify that this "run" works as expected. It may not since "npm run" is reserved
 
 ```json
 {
@@ -105,7 +167,7 @@ Add a command to run your scripts
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "ts-node"
+    "start": "ts-node"
   },
   "author": "",
   "license": "ISC",
@@ -124,7 +186,7 @@ The only thing that's noteworthy here is the "scripts" object
 
 # The Type System
 
-The means by which TypeScript checks to see if your code is type safe
+The means by which the TypeScript transpiler can perform compile-time checks to see if your code is type safe
 
 ---
 
@@ -150,18 +212,18 @@ No code-along here, but take a minute to discuss how a variables type cannot cha
 
 ```typescript
 // Boolean
-const myBool: boolean = true;
+var myBool: boolean = true;
 
 // Number
-const myNum: number = 6;
-const myFloat: number = 6.6;
-const myHex: number = 0xf00d;
+var myNum: number = 6;
+var myFloat: number = 6.6;
+var myHex: number = 0xf00d;
 
 // String
-const myString: string = 'Hello World';
+var myString: string = 'Hello World';
 
 // Array
-const myArr: number[] = [6, 23, 4.8];
+var myArr: number[] = [6, 23, 4.8];
 ```
 
 ---
@@ -169,6 +231,13 @@ const myArr: number[] = [6, 23, 4.8];
 # Type Inference
 
 The TypeScript compiler will predict the type annotations for a given variable based upon possible values for that variable
+
+// TODO make this thematic
+
+```typescript
+var myNum = 6;
+// myNum: number
+```
 
 ```notes
 This slide should inclide a short live demo of type inference in action
@@ -208,59 +277,11 @@ This is a live coding section
 
 ---
 
-# NPM packages and @types
-
-Type annotations for NPM packages can be downloaded by using the `@types/` prefix. Let's use [request promise native](https://github.com/request/request-promise-native) as an example
-
-```bash
-$ npm install --save request
-$ npm install --save request-promise-native
-$ npm install --save @types/request-promise-native
-```
-
-```notes
-This slide should include a quick live demo of the downloaded types working in VS Code
-```
+// TODO add a guided practice
 
 ---
 
-# Let's make an Express app
-
-* write a `/roll-call` route that responds with all monsters' names
-* add a `Food` enum and give each monster an array of `foodSources`
-* write a `/:name/feed?foodSource=brains&units=2` route which checks if the food you feed a monster is valid
-* add an `Attack` enum and give each monster an array of `weaknesses`
-* write a `/:name/attack?source=stake` route which checks to see if the monster can be defeated by the attack and deletes it if the attack succeeds
-* BONUS: add unit tests using Mocha/Chai
-* BONUS: save your monsters to MongoDB or a database of your choice
-
-```notes
-This slide will be a code-along in which we get the basic application set up, and then students will go off and work on their own
-
-Install dependencies
-
-npm init
-npm install --save typescript
-npm install --save express
-
-mkdir src
-touch src/app.ts
-
-Start writing app.get and pause to get type annotations
-
-npm install --save-dev @types/express
-
-Finish writing app.get with a simple 'Hello' response and add app.listen
-
-Setup tsconfig.json and then package.json start command
-
-npm install --save-dev nodemon
-touch nodemon.json
-
-Update package.json to use the nodemon config
-
-Setup hashmap of monsters
-```
+// TODO add optional homework
 
 ---
 
@@ -268,4 +289,4 @@ Setup hashmap of monsters
 
 We really value your feedback! Please take a minute to fill out this form:
 
-// TODO add link
+http://bit.ly/GDI-NYC
