@@ -186,7 +186,7 @@ The only thing that's noteworthy here is the "scripts" object
 
 # The Type System
 
-The means by which the TypeScript transpiler can perform compile-time checks to see if your code is type safe
+How the TypeScript transpiler can perform compile-time checks to see if your code is type safe
 
 ---
 
@@ -232,15 +232,13 @@ var myArr: number[] = [6, 23, 4.8];
 
 The TypeScript compiler will predict the type annotations for a given variable based upon possible values for that variable
 
-// TODO make this thematic
-
 ```typescript
-var myNum = 6;
-// myNum: number
+var color = 'red';
+// color: string
 ```
 
 ```notes
-This slide should inclide a short live demo of type inference in action
+This slide should include a short live demo of type inference in action
 ```
 
 ---
@@ -257,11 +255,19 @@ This is a good opportunity to check familiarity with interfaces
 
 ---
 
+# Writing and implementing an interface
+
+```notes
+This is a live coding section. We'll write a Flower interface together
+```
+
+---
+
 # What is an 'any' type?
 
 An `any` type is used to describe the type of a variable that we are unsure of at the time of writing.
 
-`any` is helpful when migrating an existing JavaScript application onto TypeScript.
+`any` is helpful when migrating an existing JavaScript application onto TypeScript, but should be avoided in production-quality code.
 
 ```notes
 any can also be a helpful way of getting the transpiler to compile your code while developing a feature
@@ -269,19 +275,9 @@ any can also be a helpful way of getting the transpiler to compile your code whi
 
 ---
 
-# Writing and implementing an interface
+# Let's build a garden
 
-```notes
-This is a live coding section
-```
-
----
-
-// TODO add a guided practice
-
----
-
-// TODO add optional homework
+* Add a Gardener class to your application
 
 ---
 
