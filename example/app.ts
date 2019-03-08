@@ -9,6 +9,12 @@ interface Flower {
   water: () => void;
 }
 
+interface Order {
+  type: 'sunflower' | 'rose' | 'tulip';
+  amount: number;
+  color?: string;
+}
+
 /**
  * Flower classes
  */
@@ -62,5 +68,26 @@ class Gardener {
     const rose = new Rose('red');
     const tulip = new Tulip('pink');
     return [sunflower, rose, tulip];
+  }
+
+  createCustomBouquet = (orders: Order[]): Flower[] => {
+    const bouquet: Flower[] = [];
+    for (const order of orders) {
+      switch(order.type){
+        case('sunflower'):
+          bouquet.push(new Sunflower());
+          break;
+
+        case('rose'):
+          bouquet.push(new Rose(order.color));
+          break;
+
+        case('tulip'):
+          bouquet.push(new Tulip(order.color));
+          break;
+      }
+    }
+
+    return bouquet;
   }
 }
