@@ -16,11 +16,12 @@ $ cd gdi-typescript-day1/exercise
 ---
 
 # Your Instructors
+
 // TODO add Instructors
 
 ---
 
-# Introduction to TypeScript
+# Intro to TypeScript: Part 1
 
 <div>
   <img
@@ -91,8 +92,8 @@ greetEveryone.greet();
 Compile-time checks allow us to enforce that our program will execute properly without having to run it.
 
 ```typescript
-add(5, '2');
-// Argument of type '"2"' is not assignable to parameter of type 'number'.
+add(5, 'two');
+// Argument of type '"two"' is not assignable to parameter of type 'number'.
 ```
 
 ---
@@ -113,7 +114,10 @@ function generateArticle(title: string, body: string, author: User): Article {
 
 ## Intellisense
 
-// TODO Example gif of Intellisense in action
+<img
+  src={`${require('path').dirname(require.main.filename)}/images/rose.gif`}
+  width='200%'
+/>
 
 ---
 
@@ -196,7 +200,9 @@ How the TypeScript transpiler can perform compile-time checks to see if your cod
   lang='typescript'
   steps={[
     { notes: 'Let\'s look at a few examples' },
+    { lines: [1], notes: 'Variable declaration' },
     { tokens: { 1: [2, 3, 4] }, notes: 'Most type declarations follow this syntax' },
+    { lines: [2], notes: 'Function signature' },
     { tokens: { 2: [6, 7, 8] }, notes: 'We can use the same syntax for a funtion\s parameters...' },
     { tokens: { 2: [10, 11, 12] }, notes: '... as well as a function\'s return type' },
   ]}
@@ -255,10 +261,60 @@ This is a good opportunity to check familiarity with interfaces
 
 ---
 
-# Writing and implementing an interface
+# Writing an interface
+
+```typescript
+interface Flower {
+  petals: number;
+  height: number;
+  color: string;
+  fragrence: boolean;
+}
+```
 
 ```notes
 This is a live coding section. We'll write a Flower interface together
+```
+
+---
+
+# Implementing an interface
+
+```typescript
+class Tulip implements Flower {
+  petals = 6;
+  height = 0;
+  color = 'pink';
+  fragrence = true;
+}
+```
+
+```notes
+We'll live code the class above, but we'll also add add a constructor so that color can be set
+```
+---
+
+# Initializing classes
+
+```typescript
+const myTulip = new Tulip('yellow');
+```
+
+---
+
+<CodeSurfer
+  title='Breaking down the function signature'
+  code={require('!raw-loader!./snippets/function-example.ts')}
+  lang='typescript'
+  steps={[
+    { notes: 'What does a TypeScript function look like?' },
+    { tokens: { 1: [4, 5, 6, 7, 8] }, notes: 'Parameters can be typed in-line as so' },
+    { tokens: { 1: [9, 10, 11, 12] }, notes: 'Return types can be inferred by the compiler, but are better strongly typed' },
+  ]}
+/>
+
+```notes
+This part is a code-along. Talk through how the compiler can infer the returned Flower[]
 ```
 
 ---
@@ -271,13 +327,37 @@ An `any` type is used to describe the type of a variable that we are unsure of a
 
 ```notes
 any can also be a helpful way of getting the transpiler to compile your code while developing a feature
+This slide should prompt writing out an order. Start by hard-coding the object, and then writing the interface itself
 ```
+
+---
+
+<CodeSurfer
+  title='Optional fields'
+  code={require('!raw-loader!./snippets/optional-example.ts')}
+  lang='typescript'
+  steps={[
+    { notes: 'Let\'s modify the Order interface' },
+    { tokens: { 3: [1] }, notes: 'The "?" denotes a field that may be null or undefined' },
+  ]}
+/>
 
 ---
 
 # Let's build a garden
 
-// TODO fill out prompts
+* Add another class that implements `Flower` to your garden
+* Modify your `createBouquet()` function and `Order` interface to return the correct `Flower`s based on a `type: string` field
+* Add a `height` (in centimeters) to your `Flower` interface and make sure that all of your `Flower`s implement it properly
+* Add a `water()` function to your `Flower` interface which
+  * takes an amount of `milliliters` as an argument and
+  * grows your `Tulip`'s height by 1cm per every 100ml of water
+  * grows your other `Flower`'s heights 1cm per different amounts of water
+
+**BONUS**
+
+* Write a new function that takes `Order[]` as an argument and returns a bouquet of `Flower[]`
+  * Your order should have an interface for the `type`, `color`, and `amount` of flowers
 
 ---
 

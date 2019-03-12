@@ -1,0 +1,3 @@
+const createNewBouquet = (order: Order): Flower[] => {
+  ...
+};

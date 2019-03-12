@@ -6,11 +6,11 @@ interface Flower {
   height: number;
   color: string;
   fragrence: boolean;
-  water: () => void;
+  water: (ml: number) => void;
 }
 
 interface Order {
-  type: 'sunflower' | 'rose' | 'tulip';
+  type: string;
   amount: number;
   color?: string;
 }
@@ -24,8 +24,8 @@ class Sunflower implements Flower {
   color = 'yellow';
   fragrence = false;
 
-  water = () => {
-    this.height += 5;
+  water = (ml: number) => {
+    this.height += ml / 500;
   }
 }
 
@@ -39,8 +39,8 @@ class Rose implements Flower {
     this.color = color;
   }
 
-  water = () => {
-    this.height += 1;
+  water = (ml: number) => {
+    this.height += ml / 200;
   }
 }
 
@@ -54,40 +54,82 @@ class Tulip implements Flower {
     this.color = color;
   }
 
-  water = () => {
-    this.height += 2;
+  water = (ml: number) => {
+    this.height += ml / 100;
   }
 }
 
 /**
- * Gardener
+ * Creating a basic order
  */
-class Gardener {
-  createBouquet = (): Flower[] => {
-    const sunflower = new Sunflower();
-    const rose = new Rose('red');
-    const tulip = new Tulip('pink');
-    return [sunflower, rose, tulip];
-  }
+const createBouquet = (order: Order): Flower[] => {
+  const bouquet: Flower[] = [];
 
-  createCustomBouquet = (orders: Order[]): Flower[] => {
-    const bouquet: Flower[] = [];
-    for (const order of orders) {
-      switch(order.type){
-        case('sunflower'):
-          bouquet.push(new Sunflower());
-          break;
-
-        case('rose'):
-          bouquet.push(new Rose(order.color));
-          break;
-
-        case('tulip'):
-          bouquet.push(new Tulip(order.color));
-          break;
+  switch(order.type){
+    case('sunflower'):
+      for (let i = 0; i < order.amount; i++) {
+        bouquet.push(new Sunflower());
       }
-    }
+      break;
 
-    return bouquet;
+    case('rose'):
+      for (let i = 0; i < order.amount; i++) {
+        bouquet.push(new Rose(order.color));
+      }
+      break;
+
+    case('tulip'):
+      for (let i = 0; i < order.amount; i++) {
+        bouquet.push(new Tulip(order.color));
+      }
+      break;
   }
-}
+
+  return bouquet;
+};
+
+const createComplexBouquet = (orders: Order[]): Flower[] => {
+  const bouquet: Flower[] = [];
+
+  for (const order of orders) {
+    bouquet.push(...createBouquet(order));
+  }
+
+  return bouquet;
+};
+
+/**
+ * Watering a flower
+ */
+
+const myTulip = new Tulip('red');
+myTulip.water(5000);
+
+console.log(`My tulip is now ${myTulip.height}cm tall!`);
+
+/**
+ * Creating a complex order
+ */
+const bouquet = createComplexBouquet([
+  {
+    type: 'tulip',
+    amount: 3,
+    color: 'pink',
+  },
+  {
+    type: 'tulip',
+    amount: 2,
+    color: 'yellow',
+  },
+  {
+    type: 'rose',
+    amount: 5,
+    color: 'red',
+  },
+  {
+    type: 'sunflower',
+    amount: 5,
+  },
+]);
+
+console.log(bouquet);
